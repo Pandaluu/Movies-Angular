@@ -1,2 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'fav';
+  src: url('./assets/fonts/Pacifico/Pacifico-Regular.ttf') format('truetype');
+}
 $default-font-color: hsl(200, 52%, 25%)  //view saturation light
