@@ -29,17 +29,22 @@ export class AppComponent {
       year: 2014,
       country: 'br',
       shown: true
-
+    },
+    {
+      title: 'Parasite',
+      year: 2019,
+      country: 'kr',
+      shown: true
     }
   ];
 
-  public toggleCountry(): void {
-    this.defaultCountry =
-    (this.defaultCountry === 'us') ? this.defaultCountry = 'br'
-                                  : this.defaultCountry = 'us';
+  public countries: string [] = [];
 
-    this.movies.forEach((movie: any) => {
-      movie.shown = (movie.country === this.defaultCountry);
+  public constructor() {
+    this.movies.forEach(movie => {
+      if (!this.countries.includes(movie.country)) {
+        this.countries.push(movie.country);
+      }
     });
   }
 }
