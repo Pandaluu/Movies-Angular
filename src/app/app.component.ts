@@ -9,7 +9,7 @@ import { Title } from '@angular/platform-browser';
 export class AppComponent {
   public title = 'movies';
 
-  public defaultCountry = 'us';
+  public defaultCountry = 'all';
 
   public movies: any[] = [
     {

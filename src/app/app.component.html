@@ -1,7 +1,7 @@
 <p>Hey, i'm AppComponent, my title is {{ title | uppercase }}</p>
 
 <div *ngFor="let movie of movies">
-    <div class="movie" *ngIf="movie.country == defaultCountry">
+    <div class="movie" *ngIf= "(movie.country == defaultCountry) || defaultCountry =='all'">
       <h2 class="title"
           [ngClass] ="{'old': movie.year < 2014}"
       >
@@ -13,7 +13,7 @@
 </div>
 
 <div id="filter">
-  <select size="1">
+  <select size="1" [(ngModel)] = "defaultCountry">
     <option value="all" selected>
       All
     </option>
