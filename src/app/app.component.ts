@@ -38,13 +38,11 @@ export class AppComponent {
     }
   ];
 
-  public countries: string [] = [];
+  public countries: Set<string> = new Set();
 
   public constructor() {
     this.movies.forEach(movie => {
-      if (!this.countries.includes(movie.country)) {
-        this.countries.push(movie.country);
-      }
+      this.countries.add(movie.country);
     });
   }
 }
