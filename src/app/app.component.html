@@ -12,13 +12,16 @@
 
 </div>
 
-<ul>
-  <li [ngClass]= "{'clicked': defaultCountry == 'us'}"
-   (click) ="defaultCountry='us'">
-    [us]
-  </li>
-  <li [ngClass]= "{'clicked': defaultCountry == 'br'}"
-  (click)="defaultCountry='br'">
-    [br]
-  </li>
-</ul>
+<div id="filter">
+  <select size="1">
+    <option value="all" selected>
+      All
+    </option>
+    <option value="us">
+      United States of America
+    </option>
+    <option value="br">
+      British
+    </option>
+  </select>
+</div>
