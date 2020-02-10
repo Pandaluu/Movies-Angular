@@ -1,0 +1,32 @@
+$default-font-color: hsl(200, 52%, 25%);
+
+div {
+  color: $default-font-color;
+  &.movie {
+    min-width: 10em;
+    width: auto;
+    min-height: 5em;
+    height: auto;
+
+    h2 {
+      &.title {
+        letter-spacing: 0.5em;
+        text-transform: uppercase;
+        color: red;
+      }
+    }
+  }
+}
+    ul {
+      list-style: none;
+      display: flex;
+      width: 20%;
+      justify-content: space-around;
+
+      li {
+        cursor: pointer;
+        &.clicked {
+          color: cadetblue;
+        }
+      }
+    }
