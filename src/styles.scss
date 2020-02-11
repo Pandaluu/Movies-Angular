@@ -3,4 +3,8 @@
   font-family: 'fav';
   src: url('./assets/fonts/Caveat/Caveat-Regular.ttf') format('truetype');
 }
+@font-face {
+  font-family: 'cool';
+  src: url('./assets/fonts/Oswald/Oswald-VariableFont_wght.ttf') format('truetype');
+}
 $default-font-color: hsl(200, 52%, 25%)  //view saturation light
