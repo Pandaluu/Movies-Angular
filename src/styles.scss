@@ -7,4 +7,7 @@
   font-family: 'cool';
   src: url('./assets/fonts/Oswald/Oswald-VariableFont_wght.ttf') format('truetype');
 }
-$default-font-color: hsl(200, 52%, 25%)  //view saturation light
+$default-font-color: hsl(200, 52%, 25%);  //view saturation light
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

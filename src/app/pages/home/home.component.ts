@@ -15,25 +15,25 @@ export class HomeComponent implements OnInit {
     {
       title: 'Joker',
       year: 2019,
-      country: 'us',
+      country: 'United States',
       shown: true
     },
     {
       title: 'Avengers',
       year: 2012,
-      country: 'us',
+      country: 'USA',
       shown: true
     },
     {
       title: 'Interstellar',
       year: 2014,
-      country: 'br',
+      country: 'Angleterre',
       shown: true
     },
     {
       title: 'Parasite',
       year: 2019,
-      country: 'kr',
+      country: 'Corée',
       shown: true
     }
   ];

@@ -1,21 +1,39 @@
-<p>Movies</p>
+<p id="moviestitle">Movies</p>
 
 <div *ngFor="let movie of movies">
-    <div class="movie" *ngIf= "(movie.country == defaultCountry) || defaultCountry =='all'">
-      <h2 class="title"
+    <!-- <div class="movie" *ngIf= "(movie.country == defaultCountry) || defaultCountry =='all'"> -->
+      <!-- <h2 class="title"
           [ngClass] ="{'old': movie.year < 2014}"
       >
         {{movie.title}}
       </h2>
       <h3>{{movie.year}}</h3>
-    </div>
+    </div> -->
 
+
+    <mat-card cascade="true" wider="true" reverse="true" class="exa">
+      <mat-card-content *ngIf= "(movie.country == defaultCountry) || defaultCountry =='all'">
+        <mat-card-title>{{movie.title}}</mat-card-title>
+        <mat-card-subtitle>{{movie.year}}</mat-card-subtitle>
+        <img mat-card-image src="./assets/img/joker-poster.jpg">
+      </mat-card-content>
+    </mat-card>
 </div>
 
 
 <div id="filter">
-  <select size="1" [(ngModel)] = "defaultCountry">
+  <!-- <select size="1" [(ngModel)] = "defaultCountry">
     <option value="all" selected>All</option>
     <option *ngFor='let country of countries' value="{{country }}">{{country}}</option>
-  </select>
+  </select> -->
+
+<mat-form-field>
+  <mat-label>Countries</mat-label>
+  <mat-select size="1" [(ngModel)] = "defaultCountry">
+    <mat-option value="all" Select>All</mat-option>
+    <mat-option *ngFor='let country of countries' [value]="country">
+      {{country}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 </div>
