@@ -1,27 +1,30 @@
-<p id="moviestitle">Movies</p>
+<p id="titleAllMovies">Movies</p>
 
-<div *ngFor="let movie of movies">
-    <!-- <div class="movie" *ngIf= "(movie.country == defaultCountry) || defaultCountry =='all'"> -->
-      <!-- <h2 class="title"
-          [ngClass] ="{'old': movie.year < 2014}"
-      >
-        {{movie.title}}
-      </h2>
-      <h3>{{movie.year}}</h3>
-    </div> -->
-
-
+<div *ngFor="let movie of movies" [hidden]="!((movie.year == defaultYear) || defaultYear == 0)">
     <mat-card class="card">
-      <mat-card-content *ngIf= "(movie.country == defaultCountry) || defaultCountry =='all'">
+      <mat-card-content *ngIf= "(movie.year == defaultYear) || defaultYear == 0">
         <img mat-card-image src="{{movie.src}}">
         <mat-card-title>{{movie.title}}</mat-card-title>
         <mat-card-subtitle>{{movie.year}}</mat-card-subtitle>
       </mat-card-content>
     </mat-card>
-</div>
+  </div>
+
 
 
 <div id="filter">
+  <mat-form-field>
+    <mat-label>By years</mat-label>
+    <mat-select [(ngModel)] = "defaultYear">
+      <mat-option value="0" Select>All</mat-option>
+      <mat-option *ngFor="let year of years" value="{{year}}">
+        {{year}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  </div>
+
+<!-- <div id="filter">
 <mat-form-field>
   <mat-label>Countries</mat-label>
   <mat-select size="1" [(ngModel)] = "defaultCountry">
@@ -31,4 +34,4 @@
     </mat-option>
   </mat-select>
 </mat-form-field>
-</div>
+</div>-->

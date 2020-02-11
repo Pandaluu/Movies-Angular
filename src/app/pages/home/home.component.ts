@@ -13,42 +13,19 @@ export class HomeComponent implements OnInit {
   public title = 'movies';
   public defaultCountry = 'all';
   public countries: Set<string> = new Set();
+  public defaultYear = 0;
+  public years: number[] = [];
 
-  public movies: any[] = [
-    {
-      title: 'Joker',
-      year: 2019,
-      country: 'United States',
-      shown: true,
-      src: './assets/img/joker-poster.jpg'
-    },
-    {
-      title: 'Avengers',
-      year: 2012,
-      country: 'United States',
-      shown: true,
-      src: './assets/img/avengers-poster.jpg'
-    },
-    {
-      title: 'Interstellar',
-      year: 2014,
-      country: 'Angleterre',
-      shown: true,
-      src: './assets/img/interstellar.jpg'
-    },
-    {
-      title: 'Parasite',
-      year: 2019,
-      country: 'Corée',
-      shown: true,
-      src: '.assets/img/parasite_poster.jpeg'
-    }
-  ];
+
+  public movies: any[] = [];
 
   constructor(private movieService: MovieService) {
-    this.movies.forEach(movie => {
-      this.countries.add(movie.country);
-    });
+
+
+  }
+
+  ngOnInit(): void {
+    const years: Set<number> = new Set<number>();
 
     this.movieService.all()
     .pipe(
@@ -58,10 +35,10 @@ export class HomeComponent implements OnInit {
     .subscribe((response: any[]) => {
       console.log(`Response : ${JSON.stringify(response)}`);
       this.movies = response.map((movie: Movie) => {
+        years.add(movie.year);
         return new Movie().deserialize(movie);
       });
+      this.years = Array.from(years).sort();
     });
   }
-
-  ngOnInit(): void {}
 }
