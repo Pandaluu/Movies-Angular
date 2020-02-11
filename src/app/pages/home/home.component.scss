@@ -31,21 +31,19 @@ div {
         }
       }
     }
+
 #moviestitle {
  text-transform: uppercase;
  font-family: 'cool';
- font-size: 2em;
+ font-size: 3em;
+ text-align: center;
 }
 
-.exa {
-  display: flex;
-  font-size: 1em;
-  min-width: 10em;
-    width: auto;
-    min-height: 5em;
-    height: auto;
+
+.card {
+  max-width: 20%;
 }
 
-img {
-  max-width: 15%;
-}
+// img {
+//   max-width: 15%;
+// }
