@@ -1,8 +1,9 @@
-<div class="example-container">
+<form [formGroup]="searchForm">
   <mat-form-field appearance="outline">
     <mat-label>Movies</mat-label>
-    <input [(ngModel)]="searchTerm" matInput type="search" name="search" (keyup)="onKey($event)">
+    <input matInput type="search" formControlName="searchTerm">
   </mat-form-field>
-  <button mat-icon-button aria-label="search-icon" (click)= "doSearch()">
+  <button mat-icon-button aria-label="search-icon" (click)= "doSearch()" [disabled]="searchForm.invalid">
     <mat-icon>search</mat-icon>
   </button>
+</form>

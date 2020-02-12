@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private movieService: MovieService
-  ){}
+  ) {}
 
   ngOnInit(): void {
     const years: Set<number> = new Set<number>();

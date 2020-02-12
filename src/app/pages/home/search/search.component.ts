@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MovieService } from 'src/app/core/service/movie.service';
 import { Movie } from 'src/app/core/models/movie';
 import { take } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-search',
@@ -10,27 +11,35 @@ import { take } from 'rxjs/operators';
 })
 export class SearchComponent implements OnInit {
 
-  public searchTerm: string = '';
 
   @Output() movies: EventEmitter<Movie[]> = new EventEmitter<Movie[]>();
 
-  constructor(private movieService: MovieService) { }
+  public searchForm: FormGroup;
+
+  constructor(
+    private movieService: MovieService,
+    private formBuilder: FormBuilder) { }
+
+  public get searchTerm(): AbstractControl {
+      return this.searchForm.controls.searchTerm;
+  }
 
   ngOnInit(): void {
+    this.searchForm = this.formBuilder.group({
+      searchTerm: [ // controle formulaire
+        '', // default value for the control
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(2)
+        ])
+      ]
+    });
   }
-
-  public onKey($event: any) {
-    if ($event.target.value.toString().trim().lenght >= 2) {
-      this.searchTerm += $event.target.value;
-    }
-    console.log(this.searchTerm);
-  }
-
 
   public doSearch(): void {
-    if (this.searchTerm.trim().length > 0) {
+    if (this.searchTerm.value.trim().length > 0) {
       let movies: Movie[] = [];
-      this.movieService.byTitle(this.searchTerm.trim())
+      this.movieService.byTitle(this.searchTerm.value.trim())
         .pipe(
           take(1)
         )
@@ -38,9 +47,16 @@ export class SearchComponent implements OnInit {
         movies = Response.map((movie: any) => {
           return new Movie().deserialize(movie);
         });
-        console.log(`Emit : ${JSON.stringify(movies)}`)
+        console.log(`Emit : ${JSON.stringify(movies)}`);
         this.movies.emit(movies);
       });
     }
   }
+
+  // public onKey($event: any) {
+  //   if ($event.target.value.toString().trim().lenght >= 2) {
+  //     this.searchTerm += $event.target.value;
+  //   }
+  //   console.log(this.searchTerm);
+  // }
 }
