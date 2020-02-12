@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
   public defaultYear = 0;
   public years: number[] = [];
 
-
   public movies: any[] = [];
 
   constructor(
@@ -39,6 +38,11 @@ export class HomeComponent implements OnInit {
       });
       this.years = Array.from(years).sort();
     });
+  }
+
+  public receiveMovies($event): void {
+    this.movies = $event;
+    console.log(`Received ${JSON.stringify(this.movies)}`);
   }
 
 }

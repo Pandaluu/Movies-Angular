@@ -1,7 +1,7 @@
 <div class="example-container">
   <mat-form-field appearance="outline">
     <mat-label>Movies</mat-label>
-    <input [(ngModel)]="searchTerm" matInput type="search" name="search">
+    <input [(ngModel)]="searchTerm" matInput type="search" name="search" (keyup)="onKey($event)">
   </mat-form-field>
   <button mat-icon-button aria-label="search-icon" (click)= "doSearch()">
     <mat-icon>search</mat-icon>

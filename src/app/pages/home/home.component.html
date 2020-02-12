@@ -1,20 +1,5 @@
 <p id="titleAllMovies">Movies</p>
 
-<div class="appSearch">
-  <app-search></app-search>
-</div>
-
-<div *ngFor="let movie of movies" [hidden]="!((movie.year == defaultYear) || defaultYear == 0)">
-    <mat-card class="card">
-      <mat-card-content *ngIf= "(movie.year == defaultYear) || defaultYear == 0">
-        <img mat-card-image src="{{movie.src}}">
-        <mat-card-title>{{movie.title}}</mat-card-title>
-        <mat-card-subtitle>{{movie.year}}</mat-card-subtitle>
-      </mat-card-content>
-    </mat-card>
-  </div>
-
-
 
 <div id="filter">
   <mat-form-field>
@@ -26,6 +11,19 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
+  </div>
+  <div class="appSearch">
+    <app-search (movies)="receiveMovies($event)"></app-search>
+  </div>
+
+<div *ngFor="let movie of movies" [hidden]="!((movie.year == defaultYear) || defaultYear == 0)">
+    <mat-card class="card">
+      <mat-card-content *ngIf= "(movie.year == defaultYear) || defaultYear == 0">
+        <img mat-card-image src="{{movie.src}}">
+        <mat-card-title>{{movie.title}}</mat-card-title>
+        <mat-card-subtitle>{{movie.year}}</mat-card-subtitle>
+      </mat-card-content>
+    </mat-card>
   </div>
 
 <!-- <div id="filter">
