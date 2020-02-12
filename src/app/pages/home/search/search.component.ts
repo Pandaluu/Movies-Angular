@@ -24,6 +24,12 @@ export class SearchComponent implements OnInit {
       return this.searchForm.controls.searchTerm;
   }
 
+  public reload(): void {
+    if (this.searchTerm.value.trim().length === 0) {
+      console.log('Have ro reload all movies');
+    }
+  }
+
   ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
       searchTerm: [ // controle formulaire

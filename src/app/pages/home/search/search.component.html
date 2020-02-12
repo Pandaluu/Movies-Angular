@@ -1,7 +1,7 @@
 <form [formGroup]="searchForm">
   <mat-form-field appearance="outline">
     <mat-label>Movies</mat-label>
-    <input matInput type="search" formControlName="searchTerm">
+    <input class="no-padding" matInput type="search" formControlName="searchTerm"(ngModelChange)="reload()">
   </mat-form-field>
   <button mat-icon-button aria-label="search-icon" (click)= "doSearch()" [disabled]="searchForm.invalid">
     <mat-icon>search</mat-icon>

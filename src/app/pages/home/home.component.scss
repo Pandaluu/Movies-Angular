@@ -32,19 +32,37 @@ div {
       }
     }
 
-#titleAllMovies {
- text-transform: uppercase;
- font-family: 'cool';
- font-size: 3em;
- text-align: center;
- color: rgb(224, 6, 53);
+.title_holder {
+  padding: 30px;
 }
 
+
+.title {
+  width: max-content;
+  margin: auto;
+  text-align: center;
+  padding: 10px 10px;
+  border: 3px solid #000;
+  border-radius: 10px;
+}
+
+.input_wrapper {
+  background-color: #e2e2e2;
+  padding: 15px 0;
+}
+
+.text {
+  font-family: 'cool';
+  font-size: 3em;
+  color: red;
+  margin: 0;
+}
 
 .card {
   max-width: 30%;
 }
 
-// img {
-//   max-width: 15%;
-// }
+#filter {
+  display: flex;
+  align-items: center;
+}

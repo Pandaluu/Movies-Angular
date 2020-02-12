@@ -1,20 +1,35 @@
-<p id="titleAllMovies">Movies</p>
-
-
-<div id="filter">
-  <mat-form-field>
-    <mat-label>By years</mat-label>
-    <mat-select [(ngModel)] = "defaultYear">
-      <mat-option value="0" Select>All</mat-option>
-      <mat-option *ngFor="let year of years" value="{{year}}">
-        {{year}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<!-- width de 100% align all child elements to center-->
+<div id="titleAllMovies" class="title_holder">
+  <!-- with_2 de ??? + add border-->
+  <div class="title">
+    <h1 class="text">movies</h1>
   </div>
-  <div class="appSearch">
+</div>
+
+
+<div id="filter" class="input_wrapper">
+  <div class="input_wrapper--year" style="
+  padding-bottom: 20px;
+  margin-right: 15px;
+">
+    <mat-toolbar>
+      <mat-form-field>
+        <mat-label>By years</mat-label>
+        <mat-select [(ngModel)] = "defaultYear">
+          <mat-option value="0" Select>All</mat-option>
+          <mat-option *ngFor="let year of years" value="{{year}}">
+            {{year}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </mat-toolbar>
+  </div>
+  <div class="input_wrapper--input">
     <app-search (movies)="receiveMovies($event)"></app-search>
   </div>
+</div>
+
+
 
 <div *ngFor="let movie of movies" [hidden]="!((movie.year == defaultYear) || defaultYear == 0)">
     <mat-card class="card">
