@@ -1,5 +1,9 @@
 <p id="titleAllMovies">Movies</p>
 
+<div class="appSearch">
+  <app-search></app-search>
+</div>
+
 <div *ngFor="let movie of movies" [hidden]="!((movie.year == defaultYear) || defaultYear == 0)">
     <mat-card class="card">
       <mat-card-content *ngIf= "(movie.year == defaultYear) || defaultYear == 0">

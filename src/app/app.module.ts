@@ -10,12 +10,14 @@ import { UiModule } from './shared/ui/ui.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
 import { HttpClientModule} from '@angular/common/http';
+import { SearchComponent } from './pages/home/search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
