@@ -19,10 +19,9 @@ export class HomeComponent implements OnInit {
 
   public movies: any[] = [];
 
-  constructor(private movieService: MovieService) {
-
-
-  }
+  constructor(
+    private movieService: MovieService
+  ){}
 
   ngOnInit(): void {
     const years: Set<number> = new Set<number>();
@@ -41,4 +40,6 @@ export class HomeComponent implements OnInit {
       this.years = Array.from(years).sort();
     });
   }
+
 }
+
