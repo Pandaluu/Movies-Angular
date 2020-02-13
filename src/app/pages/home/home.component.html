@@ -31,7 +31,7 @@
 
 
 
-<div *ngFor="let movie of movies" [hidden]="!((movie.year == defaultYear) || defaultYear == 0)">
+<div class= "setMovies" *ngFor="let movie of movies" [hidden]="!((movie.year == defaultYear) || defaultYear == 0)">
     <mat-card class="card">
       <mat-card-content *ngIf= "(movie.year == defaultYear) || defaultYear == 0">
         <img mat-card-image src="{{movie.src}}">

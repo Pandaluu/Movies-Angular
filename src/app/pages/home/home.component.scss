@@ -47,7 +47,7 @@ div {
 }
 
 .input_wrapper {
-  background-color: #e2e2e2;
+  background-color: #dfd9db;
   padding: 15px 0;
 }
 
@@ -58,11 +58,18 @@ div {
   margin: 0;
 }
 
-.card {
-  max-width: 30%;
+.setMovies {
+  display: inline-flex;
+  margin: auto;;
+}
+
+mat-card {
+  max-width: 100%;
+  margin: 12px;
 }
 
 #filter {
   display: flex;
   align-items: center;
+  color: black;
 }
