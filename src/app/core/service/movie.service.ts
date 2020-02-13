@@ -46,4 +46,15 @@ export class MovieService {
       })
     );
   }
+
+  public byYear(year: number): Observable<Movie[]> {
+    const apiRoute = `${environment.apiRoot}movie/byYear?s=${year}`;
+    return this.httpClient.get<any[]> (apiRoute)
+    .pipe(
+      take(1),
+      map((response) => {
+        return response.map((item) => new Movie().deserialize(item))
+      })
+    );
+  }
 }

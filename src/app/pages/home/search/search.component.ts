@@ -1,8 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MovieService } from 'src/app/core/service/movie.service';
 import { Movie } from 'src/app/core/models/movie';
-import { take } from 'rxjs/operators';
+import { take, map, distinctUntilChanged } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { Observable, from } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -12,7 +14,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 export class SearchComponent implements OnInit {
 
 
-  @Output() movies: EventEmitter<Movie[]> = new EventEmitter<Movie[]>();
+  @Output() movies: EventEmitter<Observable<Movie[]>> = new EventEmitter<Observable<Movie[]>>();
 
   public searchForm: FormGroup;
 
@@ -26,6 +28,10 @@ export class SearchComponent implements OnInit {
 
   public reload(): void {
     if (this.searchTerm.value.trim().length === 0) {
+      this.movies.emit(
+        this.movieService.all()
+      );
+
       console.log('Have ro reload all movies');
     }
   }
@@ -40,19 +46,23 @@ export class SearchComponent implements OnInit {
         ])
       ]
     });
+    this.searchTerm.valueChanges
+      .pipe(
+          debounceTime(400),
+          distinctUntilChanged(),
+          map(() => {
+            console.log('Value of searchTerm : ' + this.searchTerm.value)
+            this.doSearch();
+          })
+      ).subscribe();
   }
 
   public doSearch(): void {
     if (this.searchTerm.value.trim().length > 0) {
-      let movies: Movie[] = [];
-      this.movieService.byTitle(this.searchTerm.value.trim())
-        .pipe(
-          take(1)
-        )
-      .subscribe((Response: Movie[]) => {
-        console.log(`Emit : ${JSON.stringify(Response)}`);
-        this.movies.emit(Response);
-      });
+      this.movies.emit(
+        this.movieService.byTitle(this.searchTerm.value.trim()),
+      );
     }
   }
+
 }

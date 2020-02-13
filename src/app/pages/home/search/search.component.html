@@ -3,7 +3,4 @@
     <mat-label style="text-decoration: solid;">Search</mat-label>
     <input class="no-padding" matInput type="search" formControlName="searchTerm"(ngModelChange)="reload()">
   </mat-form-field>
-  <button mat-icon-button aria-label="search-icon" (click)= "doSearch()" [disabled]="searchForm.invalid">
-    <mat-icon>search</mat-icon>
-  </button>
 </form>

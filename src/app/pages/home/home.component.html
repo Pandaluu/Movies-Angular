@@ -31,10 +31,12 @@
 
 
 
-<div class= "setMovies" *ngFor="let movie of movies" [hidden]="!((movie.year == defaultYear) || defaultYear == 0)">
+<div class= "setMovies"
+  *ngFor="let movie of movies | async"
+  [hidden]="!((movie.year == defaultYear) || defaultYear == 0)"
+  >
     <mat-card class="card">
       <mat-card-content *ngIf= "(movie.year == defaultYear) || defaultYear == 0">
-        <img mat-card-image src="{{movie.src}}">
         <mat-card-title>{{movie.title}}</mat-card-title>
         <mat-card-subtitle>{{movie.year}}</mat-card-subtitle>
       </mat-card-content>
