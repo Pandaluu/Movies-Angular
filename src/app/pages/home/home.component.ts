@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MovieService } from 'src/app/core/service/movie.service';
 import { Movie } from 'src/app/core/models/movie';
 import { take } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   public countries: Set<string> = new Set();
   public defaultYear = 0;
   public years: number[] = [];
+  public yearSubscription: Subscription;
 
   public movies: Observable<Movie[]>;
 
@@ -25,6 +26,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.movies = this.movieService.all();
+    this.yearSubscription = this.movieService.years$
+    .subscribe((_years) => {
+      console.log('Years was updated :' + JSON.stringify(_years));
+      this.years = _years;
+    });
   }
 
   public receiveMovies($event): void {
