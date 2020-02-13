@@ -55,11 +55,4 @@ export class SearchComponent implements OnInit {
       });
     }
   }
-
-  // public onKey($event: any) {
-  //   if ($event.target.value.toString().trim().lenght >= 2) {
-  //     this.searchTerm += $event.target.value;
-  //   }
-  //   console.log(this.searchTerm);
-  // }
 }
