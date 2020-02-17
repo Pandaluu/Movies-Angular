@@ -38,11 +38,12 @@
     <mat-card class="card">
       <mat-card-content *ngIf= "(movie.year == defaultYear) || defaultYear == 0">
         <mat-card-title>
-          <a [routerLink]="['../', 'movie', movie.idMovie]">
-            {{ movie.title }}
-        </a>
+          {{ movie.title }}
         </mat-card-title>
         <mat-card-subtitle>{{movie.year}}</mat-card-subtitle>
+        <button class="btn btn-defaulf" mat-icon-button (click)="onClick(movie.idMovie)">
+          <mat-icon>add</mat-icon>
+        </button>
       </mat-card-content>
     </mat-card>
   </div>
