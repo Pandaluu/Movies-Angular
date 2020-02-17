@@ -1,16 +1,19 @@
 <header>
   <nav>
-    <ul>
-      <li>
-        <a [routerLink]="['home']">
-          Home
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="['login']">
-          Login
-        </a>
-      </li>
-    </ul>
+      <ul>
+          <li>
+              <a [routerLink]="['home']">
+                  <mat-icon>home</mat-icon>
+              </a>
+          </li>
+          <li *ngIf="!user">
+              <a [routerLink]="['login']">
+                  <mat-icon class="my-icons">account_box</mat-icon>
+              </a>
+          </li>
+          <li *ngIf="user" (click)="doLogout()">
+              <mat-icon class="my-icons">highlight_off</mat-icon>
+          </li>
+      </ul>
   </nav>
 </header>

@@ -1,25 +1,36 @@
-<form [formGroup] = "loginForm">
+<form [formGroup]="loginForm">
   <mat-form-field class="">
-  <mat-label>Login</mat-label>
-  <input
-    matInput
-    type="text"
-    placeholder="Your login"
-    formControlName="login"
-  >
-  <mat-error *ngIf="login.touched && login.invalid">
-    Your login is required and must have at least 5 chars.
-  </mat-error>
+      <mat-label>Login</mat-label>
+      <input
+          matInput
+          type="text"
+          placeholder="Your login"
+          formControlName="login"
+      >
+      <mat-error *ngIf="login.touched && login.invalid">
+          Your login is required and must have at least 5 chars.
+      </mat-error>
   </mat-form-field>
 
-<mat-form-field>
-  <mat-label>Password</mat-label>
-  <input
-    matInput
-    type="password"
-    placeholder="Your password"
-    formControlName="password"
-  >
-</mat-form-field>
-<button mat-raised-button color="primary"(click)="doLogin()"[disabled]="loginForm.invalid">Login</button>
+  <mat-form-field class="">
+      <mat-label>Password</mat-label>
+      <input
+          matInput
+          type="password"
+          placeholder="Your password"
+          formControlName="password"
+      >
+      <mat-error *ngIf="password.touched && password.invalid">
+          Your password is required and must be 8 chars length minimum.
+      </mat-error>
+  </mat-form-field>
+
+  <button
+      mat-raised-button
+      color="primary"
+      (click)="doLogin()"
+      [disabled]="loginForm.invalid"
+  >Go</button>
 </form>
+<!-- TODO : what if user forgot their credentials -->
+<!-- TODO : place routerLink to registering user if not -->
