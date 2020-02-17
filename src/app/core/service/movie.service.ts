@@ -60,4 +60,17 @@ export class MovieService {
      })
     );
   }
+
+  public byId(id: number): Observable<any> {
+    const apiRoot = `${environment.apiRoot}movie/${id}`;
+    return this.httpClient.get<any>(
+      apiRoot
+    )
+    .pipe(
+      take(1),
+      map((response) => {
+        return response;
+      })
+    );
+  }
 }
