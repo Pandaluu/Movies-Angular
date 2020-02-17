@@ -35,10 +35,6 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(): void {
-    this.yearSubscription.unsubscribe();
-  }
-
   public receiveMovies($event): void {
     this.movies = $event;
     console.log(`Received ${JSON.stringify(this.movies)}`);

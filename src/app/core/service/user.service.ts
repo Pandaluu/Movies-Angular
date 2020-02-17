@@ -16,7 +16,7 @@ export class UserService {
     this._registeredUsers = new Array<any>();
     this._registeredUsers.push(
       {
-        login: 'jlaubert',
+        login: 'Pandalu',
         password: 'totototo',
         token: '1234',
         isAuthenticated: false

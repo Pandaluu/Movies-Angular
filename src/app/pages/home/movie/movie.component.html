@@ -1,1 +1,24 @@
-<p>{{ movie | json }}</p>
+<div><p>{{ movie | json }}</p></div>
+
+<form [formGroup]="movieForm" style="display: flex;">
+  <div>
+  <mat-form-field class="title" style="padding: 10px;">
+    <mat-label>Update title</mat-label>
+    <textarea matInput formControlName='title' placeholder="Ex. Joker..."></textarea>
+  </mat-form-field>
+</div>
+<div>
+<mat-form-field class="synopsis" style="margin: 10px;">
+  <mat-label>Update synopsis</mat-label>
+  <textarea matInput formControlName='synopsis' placeholder="Ex. Once upon a time..."></textarea>
+</mat-form-field>
+</div>
+
+<button
+mat-raised-button
+color="primary"
+(click)='doUpdate()'
+>
+Update
+</button>
+</form>
