@@ -1,5 +1,9 @@
 <footer>
-  <span *ngIf="user">
-      {{ user.login }}
-   </span>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <span *ngIf="user">
+        {{ user.login }}
+     </span>
+    </mat-toolbar-row>
+    </mat-toolbar>
 </footer>

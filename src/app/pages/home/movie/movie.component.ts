@@ -19,7 +19,7 @@ export class MovieComponent implements OnInit {
       console.log(`Params : ${paramMap.params.id}`);
       this.movieService.byId(paramMap.params.id).subscribe((movie: any) => {
         this.movie = movie;
-      })
+      });
     });
   }
 
