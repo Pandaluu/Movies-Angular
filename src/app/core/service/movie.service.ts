@@ -75,7 +75,7 @@ export class MovieService {
   }
 
   public update(movie: any): Observable<HttpResponse<any>> {
-    const apiRoute: string = `${environment.apiRoot}movie/modify`;
+    const apiRoute = `${environment.apiRoot}movie/modify`;
 
     return this.httpClient.put(
       apiRoute,
@@ -83,6 +83,19 @@ export class MovieService {
       {
         observe: 'response'
       }
+    ).pipe(
+      take(1),
+      map((response: HttpResponse<any>) => {
+        return response;
+      })
+    );
+  }
+
+  public delete(id: number): Observable<HttpResponse<any>> {
+    const apiRoute: string = `${environment.apiRoot}movie/deleteMovie/${id}`;
+
+    return this.httpClient.delete(
+      apiRoute
     ).pipe(
       take(1),
       map((response: HttpResponse<any>) => {
