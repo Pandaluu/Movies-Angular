@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MovieComponent } from './pages/home/movie/movie.component';
+import { MovieResolver } from './core/resolver/movie-resolver';
 
 
 
@@ -18,7 +19,10 @@ const routes: Routes = [
   },
   {
     path: 'movie/:id',
-    component: MovieComponent
+    component: MovieComponent,
+    resolve: {
+      movie: MovieResolver
+    }
   },
   {
     path: 'login',
