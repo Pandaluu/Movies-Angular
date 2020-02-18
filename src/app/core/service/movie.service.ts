@@ -39,7 +39,7 @@ export class MovieService {
         return response.map((item) => {
         this._years.add(item.year);
         this.years$.next(Array.from(this._years).sort());
-        return new Movie().deserialize(item)
+        return new Movie().deserialize(item);
       });
      })
     );
@@ -55,7 +55,7 @@ export class MovieService {
         return response.map((item) => {
         this._years.add(item.year);
         this.years$.next(Array.from(this._years).sort());
-        return new Movie().deserialize(item)
+        return new Movie().deserialize(item);
       });
      })
     );
@@ -76,7 +76,7 @@ export class MovieService {
       }),
       catchError((error: any) => {
         console.log(`Something went wrong : ${JSON.stringify(error)}`);
-        return throwError(error.status)
+        return throwError(error.status);
       })
     );
   }

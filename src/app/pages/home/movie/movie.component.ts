@@ -47,7 +47,7 @@ export class MovieComponent implements OnInit {
           duration: 2500,
         verticalPosition: 'top'
       });
-    })
+    });
   }
 
   public doDelete() {
