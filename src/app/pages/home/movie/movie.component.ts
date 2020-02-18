@@ -4,6 +4,8 @@ import { MovieService } from 'src/app/core/service/movie.service';
 import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
 import { take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-movie',
@@ -17,7 +19,8 @@ export class MovieComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private movieService: MovieService,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar) { }
 
   public get synopsis(): AbstractControl {
       return this.movieForm.controls.synopsis;
@@ -38,7 +41,26 @@ export class MovieComponent implements OnInit {
     .pipe(
       take(1)
     ).subscribe((response: HttpResponse<any>) => {
-      console.log(`Update was done with : ${response.status}`);
+      this.snackBar.open(
+        'Update Done',
+       '', {
+          duration: 2500,
+        verticalPosition: 'top'
+      });
+    })
+  }
+
+  public doDelete() {
+    this.movieService.delete(this.movie)
+    .pipe(
+      take(1)
+    ).subscribe((response: Observable<any>) => {
+      this.snackBar.open(
+        'Delete Done',
+       '', {
+          duration: 2500,
+        verticalPosition: 'top'
+      });
     });
   }
 

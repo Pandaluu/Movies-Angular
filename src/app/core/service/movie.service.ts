@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Movie } from './../models/movie';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { take, map } from 'rxjs/operators';
+import { take, map, catchError } from 'rxjs/operators';
 
 
 @Injectable({
@@ -64,12 +64,19 @@ export class MovieService {
   public byId(id: number): Observable<any> {
     const apiRoot = `${environment.apiRoot}movie/${id}`;
     return this.httpClient.get<any>(
-      apiRoot
+      apiRoot,
+      {
+        observe: 'response'
+      }
     )
     .pipe(
       take(1),
       map((response) => {
-        return response;
+        return response.body;
+      }),
+      catchError((error: any) => {
+        console.log(`Something went wrong : ${JSON.stringify(error)}`);
+        return throwError(error.status)
       })
     );
   }
@@ -91,14 +98,14 @@ export class MovieService {
     );
   }
 
-  public delete(id: number): Observable<HttpResponse<any>> {
-    const apiRoute: string = `${environment.apiRoot}movie/deleteMovie/${id}`;
+  public delete(movie: Movie): Observable<any> {
+    const apiRoute = `${environment.apiRoot}movie/deleteMovie/${movie.idMovie}`;
 
     return this.httpClient.delete(
       apiRoute
     ).pipe(
       take(1),
-      map((response: HttpResponse<any>) => {
+      map((response) => {
         return response;
       })
     );
