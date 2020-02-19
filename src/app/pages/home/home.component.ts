@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
     (err) => console.error('Erreur levée :' + JSON.stringify(err)),
     () => console.warn('Completed !')
     );
-    this.socket$.next('Hello ws server');
+    this.socket$.next('Ping');
 
     this.movies = this.movieService.all();
 
