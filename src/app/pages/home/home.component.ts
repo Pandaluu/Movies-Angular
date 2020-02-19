@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Router, NavigationExtras } from '@angular/router';
 import { UserService } from 'src/app/core/service/user.service';
 import { MatSnackBarRef, SimpleSnackBar, MatSnackBar } from '@angular/material/snack-bar';
+import { WebSocketSubject } from 'rxjs/webSocket';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +22,8 @@ export class HomeComponent implements OnInit {
 
   public movies: Observable<Movie[]>;
 
+  private socket$: WebSocketSubject<any>;
+
   constructor(
     private movieService: MovieService,
     private router: Router,
@@ -29,7 +32,10 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.socket$ = new WebSocketSubject<any>('ws://127.0.0.1:9090');
+
     this.movies = this.movieService.all();
+
     this.yearSubscription = this.movieService.years$
     .subscribe((_years) => {
       console.log('Years was updated :' + JSON.stringify(_years));
