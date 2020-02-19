@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from 'src/app/core/service/movie.service';
 import { Movie } from 'src/app/core/models/movie';
+
 import { take } from 'rxjs/operators';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, from } from 'rxjs';
 import { Router, NavigationExtras } from '@angular/router';
 import { UserService } from 'src/app/core/service/user.service';
 import { MatSnackBarRef, SimpleSnackBar, MatSnackBar } from '@angular/material/snack-bar';
+
 import { WebSocketSubject } from 'rxjs/webSocket';
+
+import { environment } from './../../../environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -32,7 +36,14 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.socket$ = new WebSocketSubject<any>('ws://127.0.0.1:9090');
+    this.socket$ = new WebSocketSubject<any>(environment.wssAdress);
+    this.socket$.subscribe((socketMessage: any) => {
+      console.log(`Something come frome wsServer : ${JSON.stringify(socketMessage)}`)
+    },
+    (err) => console.error('Erreur levée :' + JSON.stringify(err)),
+    () => console.warn('Completed !')
+    );
+    this.socket$.next('Hello ws server');
 
     this.movies = this.movieService.all();
 
