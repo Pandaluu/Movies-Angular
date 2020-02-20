@@ -47,7 +47,7 @@ export class HomeComponent implements OnInit {
           this.movies = this.movies.pipe(
             map((movies: Movie[]): Movie[] => {
               let movieIndex: number = movies.findIndex(
-                (obj: Movie, index: number) => obj.idMovie == movie.idMovie
+                (obj: Movie, index: number) => obj.idMovie === movie.idMovie
               );
               movies[movieIndex] = movie;
               return movies;
@@ -58,7 +58,6 @@ export class HomeComponent implements OnInit {
     (err) => console.error('Erreur levée :' + JSON.stringify(err)),
     () => console.warn('Completed !')
     );
-    this.socket$.next('Ping');
 
     this.movies = this.movieService.all();
 
@@ -67,6 +66,7 @@ export class HomeComponent implements OnInit {
       console.log('Years was updated :' + JSON.stringify(_years));
       this.years = _years;
     });
+    this.socket$.next('Ping');
   }
 
   public receiveMovies($event): void {
@@ -107,8 +107,8 @@ export class HomeComponent implements OnInit {
     // Update the observable (retains value)
     this.movies = this.movies.pipe(
       map((movies: Movie[]): Movie[] => {
-        let movieIndex: number = movies.findIndex((obj: Movie, index: number) => obj.idMovie == movie.idMovie);
-        movie[movieIndex] = movie;
+        const movieIndex: number = movies.findIndex((obj: Movie, index: number) => obj.idMovie == movie.idMovie);
+        movies[movieIndex] = movie;
         return movies;
       })
     );

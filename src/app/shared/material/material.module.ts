@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule} from '@angular/material/toolbar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatBadgeModule} from '@angular/material/badge';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [],
@@ -23,6 +25,9 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatToolbarModule,
     MatSnackBarModule,
     MatBadgeModule,
+    BrowserModule,
+    BrowserAnimationsModule
+
   ],
   exports: [
     MatSelectModule,
@@ -33,7 +38,9 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatIconModule,
     MatToolbarModule,
     MatSnackBarModule,
-    MatBadgeModule
+    MatBadgeModule,
+    BrowserModule,
+    BrowserAnimationsModule
   ]
 })
 export class MaterialModule { }
