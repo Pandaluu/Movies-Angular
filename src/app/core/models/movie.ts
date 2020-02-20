@@ -4,6 +4,7 @@ export class Movie {
   public year: number;
   public synopsis: string;
   public like: number = 0;
+  public animationState: string = 'initial';
 
   public deserialize(datas: any): Movie {
     Object.assign(this, datas);

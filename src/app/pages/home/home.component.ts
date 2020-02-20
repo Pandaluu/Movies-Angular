@@ -11,11 +11,38 @@ import { MatSnackBarRef, SimpleSnackBar, MatSnackBar } from '@angular/material/s
 import { WebSocketSubject } from 'rxjs/webSocket';
 
 import { environment } from './../../../environments/environment';
+import { trigger, style, state, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  animations: [
+    trigger('heartGrowing', [
+      state('initial', style ({
+        transform: 'scale(1)',
+        color: 'red'
+      })),
+      state('final', style ({
+        transform: 'scale(2.0)',
+        color: 'red'
+      })),
+    transition('initial=>final', animate('900ms')),
+    transition('final=>initial', animate('900ms'))
+    ]),
+    trigger('heartSmalling', [
+      state('initial', style ({
+        transform: 'scale(2.0)',
+        color: 'red'
+      })),
+      state('final', style ({
+        transform: 'scale(1)',
+        color: 'red'
+      })),
+    transition('initial=>final', animate('900ms')),
+    transition('final=>initial', animate('900ms'))
+    ])
+  ]
 })
 
 export class HomeComponent implements OnInit {
@@ -33,39 +60,39 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private snackBar: MatSnackBar,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.socket$ = new WebSocketSubject<any>(environment.wssAdress);
     this.socket$.subscribe((socketMessage: any) => {
-        if (socketMessage._message === 'like') {
-          // Update interface for this movie
-          let movie: Movie = new Movie().deserialize(socketMessage._data);
-          console.log(`Update come frome wsServer : ${JSON.stringify(movie)}`);
+      if (socketMessage._message === 'like') {
+        // Update interface for this movie
+        let movie: Movie = new Movie().deserialize(socketMessage._data);
+        console.log(`Update come frome wsServer : ${JSON.stringify(movie)}`);
 
-          // Update movie in observable
-          this.movies = this.movies.pipe(
-            map((movies: Movie[]): Movie[] => {
-              let movieIndex: number = movies.findIndex(
-                (obj: Movie, index: number) => obj.idMovie === movie.idMovie
-              );
-              movies[movieIndex] = movie;
-              return movies;
-              })
+        // Update movie in observable
+        this.movies = this.movies.pipe(
+          map((movies: Movie[]): Movie[] => {
+            let movieIndex: number = movies.findIndex(
+              (obj: Movie, index: number) => obj.idMovie === movie.idMovie
             );
-          }
+            movies[movieIndex] = movie;
+            return movies;
+          })
+        );
+      }
     },
-    (err) => console.error('Erreur levée :' + JSON.stringify(err)),
-    () => console.warn('Completed !')
+      (err) => console.error('Erreur levée :' + JSON.stringify(err)),
+      () => console.warn('Completed !')
     );
 
     this.movies = this.movieService.all();
 
     this.yearSubscription = this.movieService.years$
-    .subscribe((_years) => {
-      console.log('Years was updated :' + JSON.stringify(_years));
-      this.years = _years;
-    });
+      .subscribe((_years) => {
+        console.log('Years was updated :' + JSON.stringify(_years));
+        this.years = _years;
+      });
     this.socket$.next('Ping');
   }
 
@@ -75,8 +102,8 @@ export class HomeComponent implements OnInit {
   }
 
   public moveTo(idMovie: number): void {
-    if( this.userService.user && this.userService.user !== null) {
-      this.router.navigate(['../','movie', idMovie]);
+    if (this.userService.user && this.userService.user !== null) {
+      this.router.navigate(['../', 'movie', idMovie]);
     } else {
       // Load a toast and route to login
       const snack: MatSnackBarRef<SimpleSnackBar> = this.snackBar.open(
@@ -88,31 +115,37 @@ export class HomeComponent implements OnInit {
         }
       );
       snack.afterDismissed().subscribe((status: any) => {
-        const navigationExtras: NavigationExtras = {state: {movie: idMovie}};
+        const navigationExtras: NavigationExtras = { state: { movie: idMovie } };
         this.router.navigate(['../', 'login'], navigationExtras);
       });
     }
   }
 
+
   public likeIt(movie: Movie): void {
-    movie.like += 1;
+    movie.animationState = 'final';
 
-    // Emit a new update to ws...
-    const message: any = {
-      message: 'like',
-      data: movie
-    };
-    this.socket$.next(message);
+    setTimeout(() => {
+      movie.like = movie.like + 1;
+      // Emit a new update to ws...
+      const message: any = {
+        message: 'like',
+        data: movie
+      };
+      this.socket$.next(message);
 
-    // Update the observable (retains value)
-    this.movies = this.movies.pipe(
-      map((movies: Movie[]): Movie[] => {
-        const movieIndex: number = movies.findIndex((obj: Movie, index: number) => obj.idMovie == movie.idMovie);
-        movies[movieIndex] = movie;
-        return movies;
-      })
-    );
+      // Update the observable (retains value)
+      this.movies = this.movies.pipe(
+        map((movies: Movie[]): Movie[] => {
+          const movieIndex: number = movies.findIndex((obj: Movie, index: number) => obj.idMovie == movie.idMovie);
+          movies[movieIndex] = movie;
+          return movies;
+        })
+      );
+      movie.animationState = 'initial';
+
+      setTimeout(() => movie.animationState = 'final', 900);
+    }, 900);
   }
-
 }
 
