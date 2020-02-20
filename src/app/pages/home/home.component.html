@@ -41,9 +41,30 @@
           {{ movie.title }}
         </mat-card-title>
         <mat-card-subtitle>{{movie.year}}</mat-card-subtitle>
-        <button class="btn btn-defaulf" mat-icon-button (click)="moveTo(movie.idMovie)">
-          <mat-icon>add</mat-icon>
-        </button>
+        <mat-card-actions>
+          <mat-icon
+          (click)="likeIt(movie)"
+          *ngIf= "movie.like==0"
+          color="warn"
+          style="cursor: pointer;"
+          >
+          favorite_border
+        </mat-icon>
+          <mat-icon
+            *ngIf="movie.like > 0"
+            matBadge="{{movie.like}}"
+            matBadgeColor="primary"
+            style="cursor: pointer;"
+            >
+            favorite
+          </mat-icon>
+          <mat-icon
+            (click)="moveTo(movie.idMovie)"
+            style="cursor: pointer; position: absolute; right: 0;"
+            >
+            more_horiz
+          </mat-icon>
+      </mat-card-actions>
       </mat-card-content>
     </mat-card>
   </div>
