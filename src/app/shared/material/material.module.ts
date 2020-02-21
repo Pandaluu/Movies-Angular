@@ -10,6 +10,7 @@ import { MatToolbarModule} from '@angular/material/toolbar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatBadgeModule} from '@angular/material/badge';
 import { BrowserModule } from '@angular/platform-browser';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [],
@@ -25,6 +26,7 @@ import { BrowserModule } from '@angular/platform-browser';
     MatSnackBarModule,
     MatBadgeModule,
     BrowserModule,
+    MatProgressBarModule,
 
   ],
   exports: [
@@ -38,6 +40,7 @@ import { BrowserModule } from '@angular/platform-browser';
     MatSnackBarModule,
     MatBadgeModule,
     BrowserModule,
+    MatProgressBarModule,
   ]
 })
 export class MaterialModule { }

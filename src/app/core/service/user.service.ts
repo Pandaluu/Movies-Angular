@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { UserInterface } from './../models/user-interface';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +14,14 @@ export class UserService {
   private _user: UserInterface = null;
   public userSubject$: BehaviorSubject<UserInterface> = new BehaviorSubject<UserInterface>(this._user);
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
 
     this._registeredUsers = new Array<any>();
     this._registeredUsers.push(
       {
-        login: 'Pandalu',
-        password: 'totototo',
-        token: '1234',
+        login: 'administrator',
+        password: 'bangtan',
+        token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbmlzdHJhdG9yIiwiZXhwIjoxNTgyMjk2NjI1LCJpYXQiOjE1ODIyNzg2MjV9.ypn5ubWt0xXUFiMsuRffVU0dhzdSTN75x_7_VHczeWMaExyxcPFGvy2BRumz92IXVKTYlzG0hDmXoHlqZTOcTQ',
         isAuthenticated: false
       }
     );
@@ -42,21 +45,43 @@ export class UserService {
     return this._user;
   }
 
-  public authenticate(user: UserInterface): boolean {
-    this._user = this._registeredUsers.find(
-      (obj: any) => obj.login == user.login && obj.password == user.password
-    );
-    if (this._user !== undefined) {
-      localStorage.setItem(
-        'user',
-        JSON.stringify({token: this._user.token})
-      );
-      this._user.isAuthenticated = true;
-      this.userSubject$.next(this._user);
-      return true;
-    }
-    this.userSubject$.next(null);
-    return false;
+  public authenticate(user: UserInterface): Promise<boolean> {
+    const uri: string = `${environment.authenticate}`;
+
+    return new Promise<boolean>((resolve) => {
+      this.httpClient.post<any>(
+        uri, // http://localhost:8080/authenticate
+        {
+          username: user.login,
+          password: user.password
+        },
+        {
+          observe: 'response'
+        }
+      ).pipe(
+        take(1)
+      ).subscribe((response: HttpResponse<any>) => {
+        if (response.status === 200) {
+          // Store token...
+          localStorage.setItem(
+            'user',
+            JSON.stringify({token: response.body.token})
+          );
+          this._user = user;
+          this._user.token = response.body.token;
+          this._user.isAuthenticated = true;
+
+          this.userSubject$.next(this._user);
+
+          resolve(true); // Take your promise
+        }
+      }, (error) => {
+        this._user = null;
+        this.userSubject$.next(this._user);
+
+        resolve(false);
+      });
+    });
   }
 
   public logout(): void {
