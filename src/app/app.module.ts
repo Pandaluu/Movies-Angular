@@ -23,9 +23,10 @@ import { AppConfig } from './core/init/app-config';
 import { LOCATION_INITIALIZED } from '@angular/common';
 
 // Translate module
-import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader, TranslateService, TranslateParser } from '@ngx-translate/core';
 import { TranslationService } from './core/service/translation.service';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateICUParser } from 'ngx-translate-parser-plural-select';
 
 // Define a function that invoke TranslationService
 export function translationInitializerFactory(

@@ -19,7 +19,7 @@
       <mat-form-field>
         <mat-label>{{ 'home.yearsSelectorLabel' | translate }}</mat-label>
         <mat-select [(ngModel)] = "defaultYear">
-          <mat-option value="0" Select>{{ 'home.AllYears' | translate }}</mat-option>
+          <mat-option value="0" Select>{{ 'home.allYears' | translate }}</mat-option>
           <mat-option *ngFor="let year of years" value="{{year}}">
             {{year}}
           </mat-option>

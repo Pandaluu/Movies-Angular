@@ -7,6 +7,9 @@
   "home" : {
     "movieSearchLabel": "Search...",
     "yearsSelectorLabel": "By years",
-    "allYears": "All years"
+    "allYears": "All..."
+  },
+    "movieListing": {
+      "moviesResult":"{movies.length, plural, =0 {no movie} =1 {one movie} many { {{movies.lenght}} movie}}"
   }
 }
