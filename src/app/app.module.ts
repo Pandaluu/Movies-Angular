@@ -9,12 +9,17 @@ import { LoginComponent } from './pages/login/login.component';
 import { UiModule } from './shared/ui/ui.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
-import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SearchComponent } from './pages/home/search/search.component';
 import { MovieComponent } from './pages/home/movie/movie.component';
 import { TokenInterceptorService } from './core/service/token-interceptor.service';
+import { AppConfig } from './core/init/app-config';
 
-
+export function initializeApp(appConfig: AppConfig) {
+  return (): Promise<any> => {
+    return appConfig.init();
+  }
+}
 
 @NgModule({
   declarations: [
@@ -34,7 +39,11 @@ import { TokenInterceptorService } from './core/service/token-interceptor.servic
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    AppConfig,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
+    { provide: APP_INITIALIZER, useFactory: initializeApp, deps: [AppConfig], multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

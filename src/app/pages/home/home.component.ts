@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MovieService } from 'src/app/core/service/movie.service';
 import { Movie } from 'src/app/core/models/movie';
 
@@ -45,7 +45,7 @@ import { trigger, style, state, transition, animate } from '@angular/animations'
   ]
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   public title = 'movies';
   public defaultYear = 0;
   public years: number[] = [];
@@ -93,7 +93,10 @@ export class HomeComponent implements OnInit {
         console.log('Years was updated :' + JSON.stringify(_years));
         this.years = _years;
       });
-    this.socket$.next('Ping');
+  }
+
+  ngOnDestroy(): void {
+    this.yearSubscription.unsubscribe();
   }
 
   public receiveMovies($event): void {
