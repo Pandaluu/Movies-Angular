@@ -1,5 +1,13 @@
 {
   "global": {
-    "title": "Films"
+    "title": "Films",
+    "fr": "Français",
+    "en": "Anglaiss"
+  },
+  "home" : {
+    "movieSearchLabel": "Rechercher...",
+    "yearsSelectorLabel": "Par année",
+    "allYears": "Toutes les années"
   }
+
 }

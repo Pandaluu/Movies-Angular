@@ -20,8 +20,8 @@ export class UserService {
     this._registeredUsers.push(
       {
         login: 'administrator',
-        password: 'bangtan',
-        token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbmlzdHJhdG9yIiwiZXhwIjoxNTgyMjk2NjI1LCJpYXQiOjE1ODIyNzg2MjV9.ypn5ubWt0xXUFiMsuRffVU0dhzdSTN75x_7_VHczeWMaExyxcPFGvy2BRumz92IXVKTYlzG0hDmXoHlqZTOcTQ',
+        password: 'password',
+        token: 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbmlzdHJhdG9yIiwiZXhwIjoxNTgzMjQ1MzExLCJpYXQiOjE1ODMyMjczMTF9.U8iGo3yUFdH_dLaVTZHxYiavp75tM-sTJK18A09bPzKSEo4QzzhLmJv2miwu1gyZVxKgD3-SwByTZtFi9C7pXg',
         isAuthenticated: false
       }
     );

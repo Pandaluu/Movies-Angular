@@ -2,7 +2,10 @@
 <div id="titleAllMovies" class="title_holder">
   <!-- with_2 de ??? + add border-->
   <div class="title">
-    <h1 class="text">movies</h1>
+    <h1>
+      {{ "global.title" | translate | uppercase }}
+    </h1>
+    <!-- <h1 class="text">movies</h1> -->
   </div>
 </div>
 
@@ -14,9 +17,9 @@
 ">
     <mat-toolbar>
       <mat-form-field>
-        <mat-label>By years</mat-label>
+        <mat-label>{{ 'home.yearsSelectorLabel' | translate }}</mat-label>
         <mat-select [(ngModel)] = "defaultYear">
-          <mat-option value="0" Select>All</mat-option>
+          <mat-option value="0" Select>{{ 'home.AllYears' | translate }}</mat-option>
           <mat-option *ngFor="let year of years" value="{{year}}">
             {{year}}
           </mat-option>

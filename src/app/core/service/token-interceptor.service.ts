@@ -16,7 +16,6 @@ export class TokenInterceptorService implements HttpInterceptor {
     }
 
     if(token) {
-      let newHeaders: HttpHeaders = req.headers;
       const bearer: string = "Bearer " + token;
 
       // Clone original request

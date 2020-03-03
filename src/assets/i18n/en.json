@@ -1,5 +1,12 @@
 {
   "global": {
-    "title": "Movies"
+    "title": "Movies",
+    "fr": "French",
+    "en": "English"
+  },
+  "home" : {
+    "movieSearchLabel": "Search...",
+    "yearsSelectorLabel": "By years",
+    "allYears": "All years"
   }
 }
