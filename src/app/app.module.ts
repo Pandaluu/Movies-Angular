@@ -27,6 +27,7 @@ import { TranslateModule, TranslateLoader, TranslateService, TranslateParser } f
 import { TranslationService } from './core/service/translation.service';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateICUParser } from 'ngx-translate-parser-plural-select';
+import { ElapsedTimePipe } from './shared/pipes/elapsed-time.pipe';
 
 // Define a function that invoke TranslationService
 export function translationInitializerFactory(
@@ -59,7 +60,8 @@ export function initializeApp(appConfig: AppConfig) {
     HomeComponent,
     LoginComponent,
     SearchComponent,
-    MovieComponent
+    MovieComponent,
+    ElapsedTimePipe
   ],
   imports: [
     BrowserModule,

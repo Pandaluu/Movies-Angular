@@ -31,8 +31,8 @@
     <app-search (movies)="receiveMovies($event)"></app-search>
   </div>
 
-<p *ngIf="(movies | async) ?.length > 1"> {{ (movies | async) ?.length }} résultats trouvés : </p>
-<p *ngIf="(movies | async) ?.length == 1"> Un seul résultat trouvé : </p>
+<p *ngIf="(movies | async) ?.length > 1"> {{ (movies | async) ?.length }} résultats trouvés </p>
+<p *ngIf="(movies | async) ?.length == 1"> Un seul résultat trouvé </p>
 <p *ngIf="(movies | async) ?.length < 1"> Aucun résultat trouvé ! </p>
 
 </div>
@@ -68,6 +68,7 @@
             >
             favorite
           </mat-icon>
+          {{movie.year | elapsedTime }}
           <mat-icon
             (click)="moveTo(movie.idMovie)"
             style="cursor: pointer; position: absolute; right: 0;"
