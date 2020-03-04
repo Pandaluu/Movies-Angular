@@ -10,6 +10,6 @@
     "allYears": "All..."
   },
     "movieListing": {
-      "moviesResult":"{movies.length, plural, =0 {no movie} =1 {one movie} many { {{movies.lenght}} movie}}"
+      "moviesResult": "{movies.length, plural, =0 {Aucun film} =1 {Un film} few { {movies.length} films} many { {movies.length} films}}"
   }
 }

@@ -10,7 +10,7 @@
     "allYears": "Toutes les années"
   },
   "movieListing": {
-    "moviesResult":"{movies.length, plural, =0 {aucun film} =1 {un film} few { {{movies.lenght}} films }"
+    "moviesResult": "{movies.length, plural, =0 {Aucun film} =1 {Un film} few { {movies.length} films} many { {movies.length} films}}"
 }
 
 }

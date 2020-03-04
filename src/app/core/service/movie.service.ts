@@ -13,6 +13,7 @@ export class MovieService {
     public _years: Set<number> = new Set<number>();
     public years$: BehaviorSubject<number[]> =
       new BehaviorSubject<number[]>(Array.from(this._years).sort());
+    public moviesCounter: number = 0;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -36,6 +37,7 @@ export class MovieService {
     .pipe(
       take(1),
       map((response) => {
+        this.moviesCounter = response.length;
         return response.map((item) => {
         this._years.add(item.year);
         this.years$.next(Array.from(this._years).sort());
@@ -52,6 +54,7 @@ export class MovieService {
     .pipe(
       take(1),
       map((response) => {
+        this.moviesCounter = response.length;
         return response.map((item) => {
         this._years.add(item.year);
         this.years$.next(Array.from(this._years).sort());
