@@ -6,7 +6,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ElapsedTimePipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
-    return 'And the year is ' + value;
+    return 'And the year is git ' + value;
   }
 
 }
