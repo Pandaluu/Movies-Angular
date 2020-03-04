@@ -12,6 +12,7 @@ import { WebSocketSubject } from 'rxjs/webSocket';
 
 import { environment } from './../../../environments/environment';
 import { trigger, style, state, transition, animate } from '@angular/animations';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -55,11 +56,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private socket$: WebSocketSubject<any>;
 
+  private translationChange$: any;
+
   constructor(
     private movieService: MovieService,
     private router: Router,
     private userService: UserService,
     private snackBar: MatSnackBar,
+    private translateService: TranslateService,
   ) { }
 
   ngOnInit(): void {
@@ -86,6 +90,11 @@ export class HomeComponent implements OnInit, OnDestroy {
       () => console.warn('Completed !')
     );
 
+    this.translationChange$ = this.translateService.onTranslationChange;
+    this.translationChange$.subscribe((event: any) => {
+      console.log('Language was changed');
+    });
+
     this.movies = this.movieService.all();
 
     this.yearSubscription = this.movieService.years$
@@ -97,6 +106,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.yearSubscription.unsubscribe();
+    this.translationChange$.unsubscribe();
   }
 
   public receiveMovies($event): void {
