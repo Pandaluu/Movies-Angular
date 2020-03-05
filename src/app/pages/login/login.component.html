@@ -31,7 +31,19 @@
       (click)="doLogin()"
       [disabled]="loginForm.invalid"
   >Go</button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="doRegister()"
+  >
+  register
+  </button>
 </form>
+
+
+
+
 
 <mat-progress-bar *ngIf="processing" mode="indeterminate"></mat-progress-bar>
 <!-- TODO : what if user forgot their credentials -->

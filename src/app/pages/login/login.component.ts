@@ -85,4 +85,7 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+  public doRegister() {
+    this.router.navigate(['register']);
+  }
 }

@@ -1,0 +1,51 @@
+<form [formGroup]="registerForm">
+  <mat-form-field class="">
+      <mat-label>Username</mat-label>
+      <input
+          matInput
+          type="text"
+          placeholder="Username.."
+          formControlName="username"
+      >
+  </mat-form-field>
+
+  <mat-form-field class="">
+      <mat-label>Password</mat-label>
+      <input
+          matInput
+          type="password"
+          placeholder="Your password"
+          formControlName="password"
+      >
+      <mat-error *ngIf="password.touched && password.invalid">
+          Your password is required and must be 5 chars length minimum.
+      </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="">
+    <mat-label>First Name</mat-label>
+    <input
+        matInput
+        type="text"
+        placeholder="Your First Name"
+        formControlName="firstName"
+    >
+</mat-form-field>
+
+<mat-form-field class="">
+  <mat-label>Last Name</mat-label>
+  <input
+      matInput
+      type="text"
+      placeholder="Your Last Name"
+      formControlName="LastName"
+  >
+</mat-form-field>
+
+  <button
+      mat-raised-button
+      color="primary"
+  >
+  Register
+  </button>
+</form>
