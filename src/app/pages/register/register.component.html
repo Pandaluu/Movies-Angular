@@ -1,51 +1,75 @@
-<form [formGroup]="registerForm">
-  <mat-form-field class="">
-      <mat-label>Username</mat-label>
-      <input
-          matInput
-          type="text"
-          placeholder="Username.."
-          formControlName="username"
-      >
-  </mat-form-field>
+<mat-card>
+  <!-- Title of an Card -->
+  <mat-card-title style="align-content: center;">
+      Create a new account
+  </mat-card-title>
 
-  <mat-form-field class="">
-      <mat-label>Password</mat-label>
-      <input
-          matInput
-          type="password"
-          placeholder="Your password"
-          formControlName="password"
-      >
-      <mat-error *ngIf="password.touched && password.invalid">
-          Your password is required and must be 5 chars length minimum.
-      </mat-error>
-  </mat-form-field>
-
-  <mat-form-field class="">
-    <mat-label>First Name</mat-label>
-    <input
-        matInput
-        type="text"
-        placeholder="Your First Name"
-        formControlName="firstName"
-    >
-</mat-form-field>
-
-<mat-form-field class="">
-  <mat-label>Last Name</mat-label>
-  <input
-      matInput
-      type="text"
-      placeholder="Your Last Name"
-      formControlName="LastName"
-  >
-</mat-form-field>
-
-  <button
-      mat-raised-button
-      color="primary"
-  >
-  Register
-  </button>
-</form>
+  <mat-card-content style="display: flex;">
+      <form [formGroup]="registerForm">
+          <table>
+            <tr>
+              <td>
+                  <mat-form-field class="">
+                      <input matInput placeholder="Username" formControlName="username">
+                      <mat-error *ngIf="password.touched && password.invalid">
+                        Your username is required and must be 5 chars length minimum.
+                    </mat-error>
+                  </mat-form-field>
+              </td>
+              <td>
+                  <mat-form-field class="">
+                      <input matInput placeholder="Password" formControlName="password" [type]="hide ? 'password' : 'text'">
+                      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                      <mat-error *ngIf="password.touched && password.invalid">
+                        Your password is required and must be 5 chars length minimum.
+                    </mat-error>
+                  </mat-form-field>
+              </td>
+          </tr>
+              <tr>
+                  <td>
+                      <mat-form-field class="">
+                          <input matInput placeholder="First Name" formControlName="firstName">
+                      </mat-form-field>
+                  </td>
+                  <td>
+                      <mat-form-field class="">
+                          <input matInput placeholder="Last Name" formControlName="lastName" >
+                      </mat-form-field>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2">
+                      <mat-form-field class="">
+                          <textarea matInput placeholder="Address" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+                      </mat-form-field>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2">
+                      <mat-form-field class="">
+                          <input matInput placeholder="Date of birth">
+                      </mat-form-field>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2">
+                      <mat-form-field class="">
+                          <input matInput placeholder="Email">
+                      </mat-form-field>
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2">
+                  </td>
+              </tr>
+              <tr>
+                  <td colspan="2" class="content-center">
+                      <button mat-raised-button color="accent">Submit</button>
+                      <button mat-raised-button color="accent">Clear</button>
+                  </td>
+              </tr>
+          </table>
+      </form>
+  </mat-card-content>
+</mat-card>

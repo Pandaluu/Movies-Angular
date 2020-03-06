@@ -12,7 +12,8 @@ import { WebSocketSubject } from 'rxjs/webSocket';
 
 import { environment } from './../../../environments/environment';
 import { trigger, style, state, transition, animate } from '@angular/animations';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslationChangeEvent, LangChangeEvent } from '@ngx-translate/core';
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-home',
@@ -58,6 +59,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private translationChange$: any;
 
+  // private langChange$: EventEmitter<LangChangeEvent>;
+
   constructor(
     private movieService: MovieService,
     private router: Router,
@@ -93,6 +96,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.translationChange$ = this.translateService.onTranslationChange;
     this.translationChange$.subscribe((event: any) => {
       console.log('Language was changed');
+      this.movies = this.movies.pipe(
+        map((movies: Movie[]): Movie[] => {
+          return movies;
+        })
+      );
     });
 
     this.movies = this.movieService.all();
@@ -107,6 +115,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.yearSubscription.unsubscribe();
     this.translationChange$.unsubscribe();
+    // this.langChange$.unsubscribe();
   }
 
   public receiveMovies($event): void {

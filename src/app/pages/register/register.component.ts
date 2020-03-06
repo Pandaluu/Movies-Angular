@@ -9,6 +9,7 @@ import { UserService } from 'src/app/core/service/user.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  hide = true;
   public registerForm: FormGroup;
   public _navigation: Navigation;
 
